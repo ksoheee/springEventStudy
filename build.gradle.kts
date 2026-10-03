@@ -29,6 +29,7 @@ dependencies {
 	testCompileOnly("org.projectlombok:lombok")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 	testAnnotationProcessor("org.projectlombok:lombok")
+    developmentOnly("org.springframework.boot:spring-boot-devtools") //개발 편의 기능 제공 h2 console 자동 활성화
 }
 
 tasks.withType<Test> {

@@ -2,11 +2,13 @@ package com.back.shared.member.domain;
 
 
 import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+@MappedSuperclass
 @Getter
 @NoArgsConstructor
 public abstract class ReplicaMember extends BaseMember{
