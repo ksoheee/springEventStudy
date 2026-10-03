@@ -19,7 +19,10 @@ public class Member extends SourceMember {
         if(amount == 0) return;
 
         setActivityScore(getActivityScore() + amount);
-        //TODO: 글 작성시 3점, 댓글작성시 1점 글과 댓글에서 이벤트 발행하면 member에서 받아서 이 메서드 호출해야함
+        //TODO: 댓글작성시 1점 글과 댓글에서 이벤트 발행하면 member에서 받아서 이 메서드 호출해야함
+        //TODO: 복사 member들에게도 활동점수 알려줘야 하므로 이벤트 발행
+
+
     }
 
 }

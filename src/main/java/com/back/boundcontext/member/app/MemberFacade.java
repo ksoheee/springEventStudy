@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class MemberFacade {
@@ -38,4 +40,13 @@ public class MemberFacade {
         return new RsData<>("201-1","%d번의 회원이 생성되었습니다.".formatted(member.getId()),member);
     }
 
+    @Transactional
+    public Optional<Member> findById(Long id) {
+        return memberRepository.findById(id);
+    }
+
+    @Transactional
+    public Optional<Member> findByUsername(String username) {
+        return memberRepository.findByUsername(username);
+    }
 }
