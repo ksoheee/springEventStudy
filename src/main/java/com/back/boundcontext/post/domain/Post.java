@@ -1,6 +1,8 @@
 package com.back.boundcontext.post.domain;
 
 import com.back.global.jpa.entity.BaseIdAndTime;
+import com.back.shared.post.dto.PostCommentDto;
+import com.back.shared.post.event.PostCommentWriteEvent;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,7 +34,17 @@ public class Post extends BaseIdAndTime {
     public PostComment addComment(PostMember author, String comment) {
         PostComment postComment = new PostComment(this, author, comment);
         comments.add(postComment);
-        //TODO: 댓글을 달면 이벤트 발행 해야함 이벤트 쏘면 -> member에서 수신
+
+        publishEvent(new PostCommentWriteEvent(new PostCommentDto(
+                postComment.getId(),
+                postComment.getCreatedDate(),
+                postComment.getModifiedDate(),
+                this.getId(),
+                postComment.getAuthor().getId(),
+                postComment.getAuthor().getUsername(),
+                postComment.getComment()
+        )));
+
         return postComment;
     }
 

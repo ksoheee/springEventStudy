@@ -2,6 +2,7 @@ package com.back.boundcontext.member.in;
 
 import com.back.boundcontext.member.app.MemberFacade;
 import com.back.boundcontext.member.domain.Member;
+import com.back.shared.post.event.PostCommentWriteEvent;
 import com.back.shared.post.event.PostWriteEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -21,4 +22,13 @@ public class MemberEventListener {
         Member member = memberFacade.findById(event.getPostDto().getAuthorId()).get();
         member.increaseActivityScore(3);
     }
+
+    @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void handel(PostCommentWriteEvent event){
+        Member member = memberFacade.findById(event.getPostCommentDto().getAuthorId()).get();
+        member.increaseActivityScore(1);
+    }
+
+
 }

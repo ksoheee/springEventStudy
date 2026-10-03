@@ -1,5 +1,7 @@
 package com.back.global.jpa.entity;
 
+import com.back.global.evnetpublisher.EventPublisher;
+import com.back.global.global.GlobalConfig;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 
@@ -11,4 +13,9 @@ public abstract class BaseEntity {
     abstract public Long getId();
     abstract public LocalDateTime getCreatedDate();
     abstract public LocalDateTime getModifiedDate();
+
+
+    protected void publishEvent(Object event){
+        GlobalConfig.getEventPublisher().publish(event);
+    }
 }

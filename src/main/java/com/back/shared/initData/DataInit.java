@@ -3,6 +3,8 @@ package com.back.shared.initData;
 import com.back.boundcontext.member.app.MemberFacade;
 import com.back.boundcontext.member.domain.Member;
 import com.back.boundcontext.post.app.PostFacade;
+import com.back.boundcontext.post.domain.Post;
+import com.back.boundcontext.post.domain.PostComment;
 import com.back.boundcontext.post.domain.PostMember;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationRunner;
@@ -33,6 +35,7 @@ public class DataInit {
         return args -> {
             self.createBaseMember();
             self.createPost();
+            self.createComment();
         };
     }
 
@@ -62,6 +65,19 @@ public class DataInit {
         postFacade.write(user2, "user2title2","content2");
 
         postFacade.write(user3, "user3title1","content1");
+
+    }
+
+    @Transactional
+    public void createComment(){
+        Post post1 = postFacade.findById(1L).get();
+        Post post2 = postFacade.findById(4L).get();
+        Post post3 = postFacade.findById(6L).get();
+
+        PostComment comment1 = post1.addComment(post3.getAuthor(), "comment1");
+        PostComment comment2 = post2.addComment(post2.getAuthor(), "comment2");
+        PostComment comment3 = post3.addComment(post1.getAuthor(), "comment3");
+
 
     }
 }
