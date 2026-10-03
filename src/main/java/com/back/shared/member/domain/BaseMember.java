@@ -13,9 +13,9 @@ import lombok.Setter;
 @Setter(value = AccessLevel.PROTECTED)  //상속한 클래스에서만 setter를 사용할 수 있음
 @NoArgsConstructor      //기본생성자 자동 생성
 public abstract class BaseMember extends BaseEntity {
+    @Column(unique = true)
     private String username;
     private String password;
-    @Column(unique = true)
     private String nickname;
     private int activityScore;
 

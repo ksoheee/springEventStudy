@@ -20,10 +20,11 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class PostFacade {
+    private final PostSyncMemberUserCase postSyncMemberUserCase;
+    private final PostWriteUseCase postWriteUseCase;
     private final PostRepository postRepository;
     private final PostMemberRepository postMemberRepository;
-    private final PostCommentRepository postCommentRepository;
-    private final EventPublisher eventPublisher;
+
 
     @Transactional(readOnly = true)
     public long count(){
@@ -32,34 +33,12 @@ public class PostFacade {
 
     @Transactional
     public PostMember syncMember(MemberDto member) {
-        PostMember postMember = new PostMember(
-                member.getId(),
-                member.getCreatedDate(),
-                member.getModifiedDate(),
-                member.getUsername(),
-                "",
-                member.getNickname(),
-                member.getActivityScore()
-
-        );
-        return postMemberRepository.save(postMember);
+        return postSyncMemberUserCase.syncMember(member);
     }
 
     @Transactional
     public RsData<Post> write(PostMember author, String title, String content){
-        Post post = postRepository.save(new Post(author, title, content));
-
-        eventPublisher.publish(new PostWriteEvent(new PostDto(
-                post.getId(),
-                post.getCreatedDate(),
-                post.getModifiedDate(),
-                post.getAuthor().getId(),
-                post.getAuthor().getUsername(),
-                post.getTitle(),
-                post.getContent()
-        )));
-
-        return new RsData<>("201-1","%d번 글이 생성되었습니다.".formatted(post.getId()),post);
+        return postWriteUseCase.write(author, title, content);
     }
 
     public Optional<PostMember> findByUsername(String username) {

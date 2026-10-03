@@ -23,7 +23,6 @@ public class Member extends SourceMember {
         if(amount == 0) return;
 
         setActivityScore(getActivityScore() + amount);
-        //TODO: 복사 member들에게도 활동점수 알려줘야 하므로 이벤트 발행
         publishEvent(new MemberModifiedEvent(new MemberDto(
                 this.getId(),
                 this.getCreatedDate(),
