@@ -47,5 +47,8 @@ public class Post extends BaseIdAndTime {
 
         return postComment;
     }
+    public boolean hasComments(){
+        return !comments.isEmpty();
+    }
 
 }
