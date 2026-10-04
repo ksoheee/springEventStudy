@@ -29,7 +29,7 @@ public class PostDataInit {
 
     @Bean
     @Order(2)
-    public ApplicationRunner DataInitApplicationRunner(){
+    public ApplicationRunner postDataInitApplicationRunner(){
         return args -> {
             self.createPost();
             self.createComment();

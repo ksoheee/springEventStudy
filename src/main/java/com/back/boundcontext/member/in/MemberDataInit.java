@@ -26,7 +26,7 @@ public class MemberDataInit {
 
     @Bean
     @Order(1)
-    public ApplicationRunner DataInitApplicationRunner(){
+    public ApplicationRunner memberDataInitApplicationRunner(){
         return args -> {
             self.createBaseMember();
         };

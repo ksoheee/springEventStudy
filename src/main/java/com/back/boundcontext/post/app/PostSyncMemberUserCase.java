@@ -2,7 +2,6 @@ package com.back.boundcontext.post.app;
 
 import com.back.boundcontext.post.domain.PostMember;
 import com.back.boundcontext.post.out.PostMemberRepository;
-import com.back.global.evnetpublisher.EventPublisher;
 import com.back.shared.member.dto.MemberDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

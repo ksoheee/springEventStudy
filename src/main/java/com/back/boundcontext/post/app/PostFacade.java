@@ -1,16 +1,11 @@
 package com.back.boundcontext.post.app;
 
 import com.back.boundcontext.post.domain.Post;
-import com.back.boundcontext.post.domain.PostComment;
 import com.back.boundcontext.post.domain.PostMember;
-import com.back.boundcontext.post.out.PostCommentRepository;
 import com.back.boundcontext.post.out.PostMemberRepository;
 import com.back.boundcontext.post.out.PostRepository;
-import com.back.global.evnetpublisher.EventPublisher;
 import com.back.global.rsData.RsData;
 import com.back.shared.member.dto.MemberDto;
-import com.back.shared.post.dto.PostDto;
-import com.back.shared.post.event.PostWriteEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
