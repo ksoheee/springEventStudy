@@ -1,0 +1,22 @@
+## 실행 환경
+
+- JDK 25
+- Spring Boot 4.1.1
+- Gradle
+- H2 Database
+
+## DB 설정
+
+- Database: H2
+- JDBC URL: `jdbc:h2:./db_dev;MODE=MySQL`
+- Username: `sa`
+- Password: 없음
+
+## 실행 방법
+
+프로젝트 루트 디렉터리에서 아래 명령어를 실행합니다.
+
+### macOS / Linux
+
+```bash
+./gradlew bootRun
