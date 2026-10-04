@@ -19,8 +19,8 @@ public class Member extends SourceMember {
         super(username, password, nickname);
     }
 
-    public void increaseActivityScore(int amount){
-        if(amount == 0) return;
+    public int increaseActivityScore(int amount){
+        if(amount == 0) return getActivityScore();
 
         setActivityScore(getActivityScore() + amount);
         publishEvent(new MemberModifiedEvent(new MemberDto(
@@ -32,6 +32,7 @@ public class Member extends SourceMember {
                 this.getNickname(),
                 this.getActivityScore()
         )));
+        return getActivityScore();
 
     }
 
