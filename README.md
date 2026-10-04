@@ -83,15 +83,18 @@ spring:
 
 애플리케이션 실행 시 초기 데이터가 정상적으로 생성되는 것을 확인했습니다.
 
-SELECT COUNT(*) FROM MEMBER_MEMBER ; 
+SELECT COUNT(*) FROM MEMBER_MEMBER ;
+
 COUNT(*)
 6
 
 SELECT COUNT(*) FROM POST_POST ; 
+
 COUNT(*)
 6
 
 SELECT COUNT(*) FROM POST_COMMENT; 
+
 COUNT(*)
 3
 
