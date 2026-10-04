@@ -1,7 +1,9 @@
 package com.back.boundcontext.cash.app;
 
 import com.back.boundcontext.cash.domain.CashMember;
+import com.back.boundcontext.cash.domain.Wallet;
 import com.back.boundcontext.cash.out.CashMemberRepository;
+import com.back.boundcontext.cash.out.WalletRepository;
 import com.back.shared.member.dto.MemberDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

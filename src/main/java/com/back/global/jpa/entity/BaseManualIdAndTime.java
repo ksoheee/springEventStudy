@@ -1,23 +1,31 @@
 package com.back.global.jpa.entity;
 
-import jakarta.persistence.*;
+
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
-@MappedSuperclass
 @Getter
+@MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public abstract class BaseIdAndTime extends BaseEntity{
+@NoArgsConstructor
+public abstract class BaseManualIdAndTime extends BaseEntity{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @CreatedDate
     private LocalDateTime createdDate;
     @LastModifiedDate
     private LocalDateTime modifiedDate;
 
+    //ID 직접 지정해야하기 떄문
+    public BaseManualIdAndTime(Long id){
+        this.id = id;
+    }
 }
