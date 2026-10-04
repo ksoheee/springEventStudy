@@ -1,4 +1,4 @@
-package com.back.shared.initData;
+package com.back.global.initData;
 
 import com.back.boundcontext.member.app.MemberFacade;
 import com.back.boundcontext.member.domain.Member;
@@ -6,6 +6,7 @@ import com.back.boundcontext.post.app.PostFacade;
 import com.back.boundcontext.post.domain.Post;
 import com.back.boundcontext.post.domain.PostComment;
 import com.back.boundcontext.post.domain.PostMember;
+import com.back.global.rsData.RsData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
@@ -57,14 +58,20 @@ public class DataInit {
         PostMember user2 = postFacade.findByUsername("user2").get();
         PostMember user3 = postFacade.findByUsername("user3").get();
 
-        postFacade.write(user1, "user1title1","content1");
-        postFacade.write(user1, "user1title2","content1");
-        postFacade.write(user1, "user1title3","content1");
+        RsData<Post> post1 = postFacade.write(user1, "user1title1","content1");
+        log.debug(post1.getMsg());
+        RsData<Post> post2 = postFacade.write(user1, "user1title2","content1");
+        log.debug(post2.getMsg());
+        RsData<Post> post3 = postFacade.write(user1, "user1title3","content1");
+        log.debug(post3.getMsg());
 
-        postFacade.write(user2, "user2title1","content2");
-        postFacade.write(user2, "user2title2","content2");
+        RsData<Post> post4 = postFacade.write(user2, "user2title1","content2");
+        log.debug(post4.getMsg());
+        RsData<Post> post5 = postFacade.write(user2, "user2title2","content2");
+        log.debug(post5.getMsg());
 
-        postFacade.write(user3, "user3title1","content1");
+        RsData<Post> post6 = postFacade.write(user3, "user3title1","content1");
+        log.debug(post6.getMsg());
 
     }
 
@@ -77,7 +84,6 @@ public class DataInit {
         PostComment comment1 = post1.addComment(post3.getAuthor(), "comment1");
         PostComment comment2 = post2.addComment(post2.getAuthor(), "comment2");
         PostComment comment3 = post3.addComment(post1.getAuthor(), "comment3");
-
 
     }
 }
