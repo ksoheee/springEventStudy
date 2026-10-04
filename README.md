@@ -83,15 +83,15 @@ spring:
 
 애플리케이션 실행 시 초기 데이터가 정상적으로 생성되는 것을 확인했습니다.
 
-SELECT COUNT(*) FROM MEMBER_MEMBER ;
+SELECT COUNT(*) FROM MEMBER_MEMBER ; 
 COUNT(*)
 6
 
-SELECT COUNT(*) FROM POST_POST ;
+SELECT COUNT(*) FROM POST_POST ; 
 COUNT(*)
 6
 
-SELECT COUNT(*) FROM POST_COMMENT;
+SELECT COUNT(*) FROM POST_COMMENT; 
 COUNT(*)
 3
 
@@ -102,37 +102,41 @@ COUNT(*)
 
 초기 데이터 생성 후 각 회원의 게시글 및 댓글 작성 수에 따라 활동점수가 정상적으로 반영되는 것을 확인했습니다.
 
-SELECT * FROM MEMBER_MEMBER;
-ID  	ACTIVITY_SCORE  	NICKNAME  	PASSWORD  	USERNAME  	CREATED_DATE  	MODIFIED_DATE
-1	0	system	pwd	system	2026-10-04 12:39:07.540657	2026-10-04 12:39:07.540657
-2	0	holding	pwd	holding	2026-10-04 12:39:07.554648	2026-10-04 12:39:07.554648
-3	0	admin	pwd	admin	2026-10-04 12:39:07.556076	2026-10-04 12:39:07.556076
-4	10	user1	pwd	user1	2026-10-04 12:39:07.557392	2026-10-04 12:39:07.709569
-5	7	user2	pwd	user2	2026-10-04 12:39:07.558686	2026-10-04 12:39:07.707809
-6	4	user3	pwd	user3	2026-10-04 12:39:07.559778	2026-10-04 12:39:07.70583
-
+SELECT * FROM MEMBER_MEMBER; 
+| ID | Activity Score | Nickname | Password | Username | Created Date | Modified Date |
+|---:|---:|---|---|---|---|---|
+| 1 | 0 | system | pwd | system | 2026-10-04 12:39:07.540657 | 2026-10-04 12:39:07.540657 |
+| 2 | 0 | holding | pwd | holding | 2026-10-04 12:39:07.554648 | 2026-10-04 12:39:07.554648 |
+| 3 | 0 | admin | pwd | admin | 2026-10-04 12:39:07.556076 | 2026-10-04 12:39:07.556076 |
+| 4 | 10 | user1 | pwd | user1 | 2026-10-04 12:39:07.557392 | 2026-10-04 12:39:07.709569 |
+| 5 | 7 | user2 | pwd | user2 | 2026-10-04 12:39:07.558686 | 2026-10-04 12:39:07.707809 |
+| 6 | 4 | user3 | pwd | user3 | 2026-10-04 12:39:07.559778 | 2026-10-04 12:39:07.705830 |
 
 ### 회원 원본과 복제본 일치 확인
 
 Member 모듈에서 관리하는 회원 원본 데이터와 Post 모듈에서 관리하는 회원 복제본 데이터를 비교하여 회원 정보가 정상적으로 동기화되는 것을 확인했습니다.
 
 SELECT * FROM MEMBER_MEMBER;
-ID  	ACTIVITY_SCORE  	NICKNAME  	PASSWORD  	USERNAME  	CREATED_DATE  	MODIFIED_DATE
-1	0	system	pwd	system	2026-10-04 12:39:07.540657	2026-10-04 12:39:07.540657
-2	0	holding	pwd	holding	2026-10-04 12:39:07.554648	2026-10-04 12:39:07.554648
-3	0	admin	pwd	admin	2026-10-04 12:39:07.556076	2026-10-04 12:39:07.556076
-4	10	user1	pwd	user1	2026-10-04 12:39:07.557392	2026-10-04 12:39:07.709569
-5	7	user2	pwd	user2	2026-10-04 12:39:07.558686	2026-10-04 12:39:07.707809
-6	4	user3	pwd	user3	2026-10-04 12:39:07.559778	2026-10-04 12:39:07.70583
+
+| ID | Activity Score | Nickname | Password | Username | Created Date | Modified Date |
+|---:|---:|---|---|---|---|---|
+| 1 | 0 | system | pwd | system | 2026-10-04 12:39:07.540657 | 2026-10-04 12:39:07.540657 |
+| 2 | 0 | holding | pwd | holding | 2026-10-04 12:39:07.554648 | 2026-10-04 12:39:07.554648 |
+| 3 | 0 | admin | pwd | admin | 2026-10-04 12:39:07.556076 | 2026-10-04 12:39:07.556076 |
+| 4 | 10 | user1 | pwd | user1 | 2026-10-04 12:39:07.557392 | 2026-10-04 12:39:07.709569 |
+| 5 | 7 | user2 | pwd | user2 | 2026-10-04 12:39:07.558686 | 2026-10-04 12:39:07.707809 |
+| 6 | 4 | user3 | pwd | user3 | 2026-10-04 12:39:07.559778 | 2026-10-04 12:39:07.705830 |
 
 SELECT * FROM POST_MEMBER;
-ID  	ACTIVITY_SCORE  	NICKNAME  	PASSWORD  	USERNAME  	CREATED_DATE  	MODIFIED_DATE
-1	0	system		system	2026-10-04 12:39:07.540657	2026-10-04 12:39:07.540657
-2	0	holding		holding	2026-10-04 12:39:07.554648	2026-10-04 12:39:07.554648
-3	0	admin		admin	2026-10-04 12:39:07.556076	2026-10-04 12:39:07.556076
-4	10	user1		user1	2026-10-04 12:39:07.557392	2026-10-04 12:39:07.681733
-5	7	user2		user2	2026-10-04 12:39:07.558686	2026-10-04 12:39:07.68674
-6	4	user3		user3	2026-10-04 12:39:07.559778	2026-10-04 12:39:07.689921
+
+| ID | Activity Score | Nickname | Password | Username | Created Date | Modified Date |
+|---:|---:|---|---|---|---|---|
+| 1 | 0 | system |  | system | 2026-10-04 12:39:07.540657 | 2026-10-04 12:39:07.540657 |
+| 2 | 0 | holding |  | holding | 2026-10-04 12:39:07.554648 | 2026-10-04 12:39:07.554648 |
+| 3 | 0 | admin |  | admin | 2026-10-04 12:39:07.556076 | 2026-10-04 12:39:07.556076 |
+| 4 | 10 | user1 |  | user1 | 2026-10-04 12:39:07.557392 | 2026-10-04 12:39:07.681733 |
+| 5 | 7 | user2 |  | user2 | 2026-10-04 12:39:07.558686 | 2026-10-04 12:39:07.686740 |
+| 6 | 4 | user3 |  | user3 | 2026-10-04 12:39:07.559778 | 2026-10-04 12:39:07.689921 |
 
 ### 재실행 시 중복 확인
 
