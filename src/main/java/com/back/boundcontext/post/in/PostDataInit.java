@@ -1,7 +1,5 @@
-package com.back.global.initData;
+package com.back.boundcontext.post.in;
 
-import com.back.boundcontext.member.app.MemberFacade;
-import com.back.boundcontext.member.domain.Member;
 import com.back.boundcontext.post.app.PostFacade;
 import com.back.boundcontext.post.domain.Post;
 import com.back.boundcontext.post.domain.PostComment;
@@ -12,46 +10,31 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.core.annotation.Order;
 import org.springframework.transaction.annotation.Transactional;
 
 @Configuration
 @Slf4j
-public class DataInit {
-    private DataInit self;
-    private final MemberFacade memberFacade;
+public class PostDataInit {
+    private final PostDataInit self;
     private final PostFacade postFacade;
 
-    public DataInit(
-            @Lazy DataInit self,
-            MemberFacade memberFacade,
+    public PostDataInit(
+            @Lazy PostDataInit self,
             PostFacade postFacade
     ){
         this.self = self;
-        this.memberFacade = memberFacade;
         this.postFacade = postFacade;
     }
 
     @Bean
-    public ApplicationRunner DataInitApplicatinRunner(){
+    @Order(2)
+    public ApplicationRunner DataInitApplicationRunner(){
         return args -> {
-            self.createBaseMember();
             self.createPost();
             self.createComment();
         };
     }
-
-    @Transactional
-    public void createBaseMember(){
-
-        Member systemMember = memberFacade.create("system","pwd","system").getData();
-        Member holdingMember = memberFacade.create("holding","pwd","holding").getData();
-        Member adminMember = memberFacade.create("admin","pwd","admin").getData();
-        Member user1Member = memberFacade.create("user1","pwd","user1").getData();
-        Member user2Member = memberFacade.create("user2","pwd","user2").getData();
-        Member user3Member = memberFacade.create("user3","pwd","user3").getData();
-
-    }
-
     @Transactional
     public void createPost(){
         PostMember user1 = postFacade.findByUsername("user1").get();
