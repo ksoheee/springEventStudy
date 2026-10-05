@@ -18,4 +18,9 @@ public abstract class BaseEntity {
     protected void publishEvent(Object event){
         GlobalConfig.getEventPublisher().publish(event);
     }
+
+    //현재 객체가 어떤 클래스의 객체인지
+    public String getModelType() {
+        return this.getClass().getSimpleName();
+    }
 }
