@@ -15,9 +15,9 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class PostFacade {
+    private final PostSupport postSupport;
     private final PostSyncMemberUserCase postSyncMemberUserCase;
     private final PostWriteUseCase postWriteUseCase;
-    private final PostSupport postSupport;
 
     @Transactional
     public PostMember syncMember(MemberDto member) {
