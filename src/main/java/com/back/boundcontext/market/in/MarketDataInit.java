@@ -1,6 +1,7 @@
 package com.back.boundcontext.market.in;
 
 import com.back.boundcontext.market.app.MarketFacade;
+import com.back.boundcontext.market.domain.Cart;
 import com.back.boundcontext.market.domain.MarketMember;
 import com.back.boundcontext.market.domain.Product;
 import com.back.shared.post.dto.PostDto;
@@ -10,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -32,9 +34,11 @@ public class MarketDataInit {
     public ApplicationRunner marketDataInitApplicationRunner() {
         return args -> {
             self.makeBaseProducts();
+            self.makeBaseCartItems();
         };
     }
 
+    @Transactional
     public void makeBaseProducts(){
         if(marketFacade.productsCount() > 0) return;
 
@@ -57,6 +61,40 @@ public class MarketDataInit {
         Product product4 = marketFacade.createProduct(marketMember2,"Post",post4.getId(),post4.getTitle(),post4.getContent(),25_000,25_000);
         Product product5 = marketFacade.createProduct(marketMember2,"Post",post5.getId(),post5.getTitle(),post5.getContent(),30_000,30_000);
         Product product6 = marketFacade.createProduct(marketMember3,"Post",post6.getId(),post6.getTitle(),post6.getContent(),35_000,35_000);
+    }
+
+    @Transactional
+    public void makeBaseCartItems(){
+        MarketMember buyer1 = marketFacade.findByUsername("user1").get();
+        MarketMember buyer2 = marketFacade.findByUsername("user2").get();
+        MarketMember buyer3 = marketFacade.findByUsername("user3").get();
+
+        Cart buyer1Cart = marketFacade.findCartByBuyer(buyer1).get();
+        Cart buyer2Cart = marketFacade.findCartByBuyer(buyer2).get();
+        Cart buyer3Cart = marketFacade.findCartByBuyer(buyer3).get();
+
+        Product product1 = marketFacade.findProductById(1L).get();
+        Product product2 = marketFacade.findProductById(2L).get();
+        Product product3 = marketFacade.findProductById(3L).get();
+        Product product4 = marketFacade.findProductById(4L).get();
+        Product product5 = marketFacade.findProductById(5L).get();
+        Product product6 = marketFacade.findProductById(6L).get();
+
+        if(buyer1Cart.hasItems()) return;
+
+        buyer1Cart.addItem(product1);
+        buyer1Cart.addItem(product2);
+        buyer1Cart.addItem(product3);
+        buyer1Cart.addItem(product4);
+
+        buyer2Cart.addItem(product1);
+        buyer2Cart.addItem(product2);
+        buyer2Cart.addItem(product3);
+
+        buyer3Cart.addItem(product1);
+        buyer3Cart.addItem(product2);
+
+
     }
 
 
