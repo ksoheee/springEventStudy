@@ -7,6 +7,7 @@ import com.back.boundcontext.post.out.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,5 +25,9 @@ public class PostSupport {
 
     public Optional<Post> findById(Long id) {
         return postRepository.findById(id);
+    }
+
+    public List<Post> findByOrderByIdDesc() {
+        return postRepository.findByOrderByIdDesc();
     }
 }
