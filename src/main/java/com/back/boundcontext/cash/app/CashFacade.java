@@ -2,8 +2,7 @@ package com.back.boundcontext.cash.app;
 
 import com.back.boundcontext.cash.domain.CashMember;
 import com.back.boundcontext.cash.domain.Wallet;
-import com.back.boundcontext.cash.out.CashMemberRepository;
-import com.back.boundcontext.cash.out.WalletRepository;
+import com.back.shared.cash.dto.CashMemberDto;
 import com.back.shared.member.dto.MemberDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,7 +23,7 @@ public class CashFacade {
     }
 
     @Transactional
-    public Wallet createWallet(CashMember cashMember){
+    public Wallet createWallet(CashMemberDto cashMember){
         return cashCreateWalletUseCase.createWallet(cashMember);
     }
 
