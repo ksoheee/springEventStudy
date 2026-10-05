@@ -35,7 +35,7 @@ public class Wallet extends BaseManualIdAndTime {
         this.holder = holder;
     }
 
-    //TODO 잔돈이 남아 있는지
+    //잔돈이 남아 있는지
     public boolean isBalance(){
         return balance > 0;
     }
