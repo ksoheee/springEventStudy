@@ -53,7 +53,7 @@ public class PostDataInit {
         RsData<Post> post5 = postFacade.write(user2, "user2title2","content2");
         log.debug(post5.getMsg());
 
-        RsData<Post> post6 = postFacade.write(user3, "user3title1","content1");
+        RsData<Post> post6 = postFacade.write(user3, "user3title1","content3");
         log.debug(post6.getMsg());
 
     }
