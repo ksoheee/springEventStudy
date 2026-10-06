@@ -3,19 +3,22 @@ package com.back.boundcontext.market.in;
 import com.back.boundcontext.market.app.MarketFacade;
 import com.back.boundcontext.market.domain.Cart;
 import com.back.boundcontext.market.domain.MarketMember;
+import com.back.boundcontext.market.domain.Order;
 import com.back.boundcontext.market.domain.Product;
+import com.back.global.rsData.RsData;
 import com.back.shared.post.dto.PostDto;
 import com.back.shared.post.out.PostApiClient;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Component
+@Slf4j
 public class MarketDataInit {
     private final MarketDataInit self;
     private final MarketFacade marketFacade;
@@ -30,11 +33,12 @@ public class MarketDataInit {
     }
 
     @Bean
-    @Order(3)
+    @org.springframework.core.annotation.Order(3)
     public ApplicationRunner marketDataInitApplicationRunner() {
         return args -> {
             self.makeBaseProducts();
             self.makeBaseCartItems();
+            self.makeBBaseOrders();
         };
     }
 
@@ -93,6 +97,35 @@ public class MarketDataInit {
 
         buyer3Cart.addItem(product1);
         buyer3Cart.addItem(product2);
+    }
+
+    @Transactional
+    public void makeBBaseOrders(){
+        if(marketFacade.ordersCount() > 0) return;
+
+        MarketMember buyer1 = marketFacade.findByUsername("user1").get();
+        MarketMember buyer2 = marketFacade.findByUsername("user2").get();
+        MarketMember buyer3 = marketFacade.findByUsername("user3").get();
+
+        Cart buyer1Cart = marketFacade.findCartByBuyer(buyer1).get();
+        Cart buyer2Cart = marketFacade.findCartByBuyer(buyer2).get();
+        Cart buyer3Cart = marketFacade.findCartByBuyer(buyer3).get();
+
+        Order order1 = marketFacade.createOrder(buyer1Cart).getData();
+        Order order2 = marketFacade.createOrder(buyer2Cart).getData();
+        Order order3 = marketFacade.createOrder(buyer3Cart).getData();
+
+        Product product1 = marketFacade.findProductById(1L).get();
+        Product product2 = marketFacade.findProductById(2L).get();
+        Product product3 = marketFacade.findProductById(3L).get();
+        Product product4 = marketFacade.findProductById(4L).get();
+        Product product5 = marketFacade.findProductById(5L).get();
+        Product product6 = marketFacade.findProductById(6L).get();
+
+        buyer1Cart.addItem(product1);
+        buyer1Cart.addItem(product2);
+        buyer1Cart.addItem(product3);
+        buyer1Cart.addItem(product4);
 
 
     }
