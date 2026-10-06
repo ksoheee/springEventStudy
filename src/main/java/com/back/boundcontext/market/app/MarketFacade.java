@@ -5,6 +5,8 @@ import com.back.boundcontext.market.domain.MarketMember;
 import com.back.boundcontext.market.domain.Order;
 import com.back.boundcontext.market.domain.Product;
 import com.back.global.rsData.RsData;
+import com.back.shared.cash.event.CashOrderPaymentFailedEvent;
+import com.back.shared.cash.event.CashOrderPaymentSucceededEvent;
 import com.back.shared.market.dto.MarketMemberDto;
 import com.back.shared.member.dto.MemberDto;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,8 @@ public class MarketFacade {
     private final MarketProductCreateUseCase marketProductCreateUseCase;
     private final MarketCartCreateUseCase marketCartCreateUseCase;
     private final MarketOrderCreateUseCase marketOrderCreateUseCase;
+    private final MarketCompleteOrderPaymentUseCase marketCompleteOrderPaymentUseCase;
+    private final MarketCancelOrderRequestPaymentUseCase marketCancelOrderRequestPaymentUseCase;
 
     @Transactional
     public MarketMember syncMember(MemberDto member) {
@@ -68,7 +72,29 @@ public class MarketFacade {
     }
 
     @Transactional
+    public Optional<Order> findOrderById(Long id){
+        return marketSupport.findOrderById(id);
+    }
+
+    //TODO ?
+    @Transactional
+    public void requestPayment(Order order, long pgPaymentAmount){
+        order.requestPayment(pgPaymentAmount);
+    }
+
+
+    @Transactional
     public Optional<Product> findProductById(Long productId){
         return marketSupport.findProductById(productId);
+    }
+
+    @Transactional
+    public void handle(CashOrderPaymentSucceededEvent event) {
+        marketCompleteOrderPaymentUseCase.handle(event);
+    }
+
+    @Transactional
+    public void handle(CashOrderPaymentFailedEvent event) {
+        marketCancelOrderRequestPaymentUseCase.handle(event);
     }
 }

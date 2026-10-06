@@ -3,6 +3,7 @@ package com.back.boundcontext.cash.in;
 import com.back.boundcontext.cash.app.CashFacade;
 import com.back.boundcontext.cash.domain.CashMember;
 import com.back.shared.cash.event.CashMemberCreatedEvent;
+import com.back.shared.market.event.MarketOrderPaymentRequestedEvent;
 import com.back.shared.member.event.MemberCreatedEvent;
 import com.back.shared.member.event.MemberModifiedEvent;
 import lombok.RequiredArgsConstructor;
@@ -31,8 +32,14 @@ public class CashEventListener {
 
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public void handel(CashMemberCreatedEvent event){
+    public void handle(CashMemberCreatedEvent event){
         cashFacade.createWallet(event.getCashMember());
+    }
+
+    @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void handle(MarketOrderPaymentRequestedEvent event){
+        cashFacade.handle(event);
     }
 
 
