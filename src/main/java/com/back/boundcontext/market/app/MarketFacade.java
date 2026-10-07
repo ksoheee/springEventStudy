@@ -76,7 +76,7 @@ public class MarketFacade {
         return marketSupport.findOrderById(id);
     }
 
-    //TODO ?
+
     @Transactional
     public void requestPayment(Order order, long pgPaymentAmount){
         order.requestPayment(pgPaymentAmount);

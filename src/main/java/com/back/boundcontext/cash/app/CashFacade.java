@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.net.http.HttpHeaders;
 import java.util.Optional;
 
 @Service
@@ -43,5 +44,10 @@ public class CashFacade {
     @Transactional
     public void handle(MarketOrderPaymentRequestedEvent event) {
         cashCompleteOrderPaymentUseCase.handle(event);
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<Wallet> findWalletByHolderId(Long holderId) {
+        return cashSupport.findWalletByHodlerId(holderId);
     }
 }

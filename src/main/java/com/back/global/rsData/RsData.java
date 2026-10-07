@@ -10,4 +10,9 @@ public class RsData<T> {
     private String msg;
     private T data;
 
+    public RsData(String resultType, String msg) {
+        this.resultType = resultType;
+        this.msg = msg;
+    }
+
 }

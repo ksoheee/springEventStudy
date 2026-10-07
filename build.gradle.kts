@@ -30,6 +30,7 @@ dependencies {
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 	testAnnotationProcessor("org.projectlombok:lombok")
     developmentOnly("org.springframework.boot:spring-boot-devtools") //개발 편의 기능 제공 h2 console 자동 활성화
+    implementation("org.springframework.boot:spring-boot-starter-validation") // 입력값 검증
 }
 
 tasks.withType<Test> {

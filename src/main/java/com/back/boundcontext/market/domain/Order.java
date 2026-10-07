@@ -25,6 +25,7 @@ public class Order extends BaseIdAndTime {
 
     private LocalDateTime requestPaymentDate; //결제 요청 시각
     private LocalDateTime paymentDate;        //결제 완료 시각
+    private LocalDateTime canceledDate;
 
 
     public Order(Cart cart) {
@@ -42,6 +43,14 @@ public class Order extends BaseIdAndTime {
 
     public boolean isPaid(){
         return paymentDate != null;
+    }
+
+    public boolean isCanceled(){
+        return canceledDate != null;
+    }
+
+    public boolean isPaymentInProgress(){
+        return requestPaymentDate != null && paymentDate == null && canceledDate == null;
     }
 
     public void completePayment(){
