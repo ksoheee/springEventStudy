@@ -35,6 +35,9 @@ custom:
   global:
     internalBackUrl: http://localhost:${server.port:8080}
     holdingMemberId: 2    #프로젝트에서 memberid 2를 특정 보관용 회원으로 사용하기 위한 설정
+  member:
+    password:
+      changeDays: 90
   market:
     toss:
       payments:
