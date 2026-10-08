@@ -42,3 +42,5 @@ custom:
     toss:
       payments:
         secretKey: ${TOSS_PAYMENTS_SECRET_KEY:}
+    product:
+      payoutRate: 90
