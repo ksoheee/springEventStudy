@@ -2,6 +2,7 @@ package com.back.global.jpa.entity;
 
 
 import com.back.global.global.GlobalConfig;
+import com.back.standard.modeltype.HasModelTypeCode;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 
@@ -9,7 +10,7 @@ import java.time.LocalDateTime;
 
 @MappedSuperclass //테이블로 만들 클래스는 아니지만, 공통 필드와 JPA 매핑 정보를 자식 Entity의 테이블에 상속시키기 위한 부모 클래스
 @Getter
-public abstract class BaseEntity {
+public abstract class BaseEntity implements HasModelTypeCode {
     abstract public Long getId();
     abstract public LocalDateTime getCreatedDate();
     abstract public LocalDateTime getModifiedDate();
@@ -21,6 +22,11 @@ public abstract class BaseEntity {
 
     //현재 객체가 어떤 클래스의 객체인지
     public String getModelType() {
+        return this.getClass().getSimpleName();
+    }
+
+    @Override
+    public String getModelTypeCode() {
         return this.getClass().getSimpleName();
     }
 }

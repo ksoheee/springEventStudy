@@ -5,7 +5,6 @@ import com.back.boundcontext.market.domain.Cart;
 import com.back.boundcontext.market.domain.MarketMember;
 import com.back.boundcontext.market.domain.Order;
 import com.back.boundcontext.market.domain.Product;
-import com.back.global.rsData.RsData;
 import com.back.shared.post.dto.PostDto;
 import com.back.shared.post.out.PostApiClient;
 import lombok.extern.slf4j.Slf4j;
@@ -60,12 +59,12 @@ public class MarketDataInit {
         MarketMember marketMember2 = marketFacade.findByUsername("user2").get();
         MarketMember marketMember3 = marketFacade.findByUsername("user3").get();
 
-        Product product1 = marketFacade.createProduct(marketMember1,"Post",post1.getId(),post1.getTitle(),post1.getContent(),10_000,10_000);
-        Product product2 = marketFacade.createProduct(marketMember1,"Post",post2.getId(),post2.getTitle(),post2.getContent(),15_000,15_000);
-        Product product3 = marketFacade.createProduct(marketMember1,"Post",post3.getId(),post3.getTitle(),post3.getContent(),20_000,20_000);
-        Product product4 = marketFacade.createProduct(marketMember2,"Post",post4.getId(),post4.getTitle(),post4.getContent(),25_000,25_000);
-        Product product5 = marketFacade.createProduct(marketMember2,"Post",post5.getId(),post5.getTitle(),post5.getContent(),30_000,30_000);
-        Product product6 = marketFacade.createProduct(marketMember3,"Post",post6.getId(),post6.getTitle(),post6.getContent(),35_000,35_000);
+        Product product1 = marketFacade.createProduct(marketMember1,post1.getModelTypeCode(),post1.getId(),post1.getTitle(),post1.getContent(),10_000,10_000);
+        Product product2 = marketFacade.createProduct(marketMember1,post2.getModelTypeCode(),post2.getId(),post2.getTitle(),post2.getContent(),15_000,15_000);
+        Product product3 = marketFacade.createProduct(marketMember1,post3.getModelTypeCode(),post3.getId(),post3.getTitle(),post3.getContent(),20_000,20_000);
+        Product product4 = marketFacade.createProduct(marketMember2,post4.getModelTypeCode(),post4.getId(),post4.getTitle(),post4.getContent(),25_000,25_000);
+        Product product5 = marketFacade.createProduct(marketMember2,post5.getModelTypeCode(),post5.getId(),post5.getTitle(),post5.getContent(),30_000,30_000);
+        Product product6 = marketFacade.createProduct(marketMember3,post6.getModelTypeCode(),post6.getId(),post6.getTitle(),post6.getContent(),35_000,35_000);
     }
 
     @Transactional

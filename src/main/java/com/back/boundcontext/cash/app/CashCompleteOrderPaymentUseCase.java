@@ -20,7 +20,7 @@ public class CashCompleteOrderPaymentUseCase {
         Wallet holdingWallet = cashSupport.findHoldingWallet().get();
 
         if(pgPayment>0){
-            customerWallet.credit(pgPayment, CashLog.EventType.충전__PG결제_토스페이먼츠, "Order",order.getId());
+            customerWallet.credit(pgPayment, CashLog.EventType.충전__PG결제_토스페이먼츠, order.getModelTypeCode(),order.getId());
         }
 
         boolean canPay = customerWallet.getBalance() >= order.getSalePrice();
@@ -29,14 +29,14 @@ public class CashCompleteOrderPaymentUseCase {
             customerWallet.debit(
                     order.getSalePrice(),
                     CashLog.EventType.사용_주문결제,
-                    "Order",
+                    order.getModelTypeCode(),
                     order.getId()
                     );
 
             holdingWallet.credit(
                    order.getSalePrice(),
                     CashLog.EventType.임시보관__주문결제,
-                    "Order",
+                    order.getModelTypeCode(),
                     order.getId()
             );
 
