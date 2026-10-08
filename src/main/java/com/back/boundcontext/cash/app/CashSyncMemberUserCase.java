@@ -3,7 +3,6 @@ package com.back.boundcontext.cash.app;
 import com.back.boundcontext.cash.domain.CashMember;
 import com.back.boundcontext.cash.out.CashMemberRepository;
 import com.back.global.evnetpublisher.EventPublisher;
-import com.back.shared.cash.dto.CashMemberDto;
 import com.back.shared.cash.event.CashMemberCreatedEvent;
 import com.back.shared.member.dto.MemberDto;
 import lombok.RequiredArgsConstructor;
