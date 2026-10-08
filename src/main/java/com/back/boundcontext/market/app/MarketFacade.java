@@ -5,8 +5,6 @@ import com.back.boundcontext.market.domain.MarketMember;
 import com.back.boundcontext.market.domain.Order;
 import com.back.boundcontext.market.domain.Product;
 import com.back.global.rsData.RsData;
-import com.back.shared.cash.event.CashOrderPaymentFailedEvent;
-import com.back.shared.cash.event.CashOrderPaymentSucceededEvent;
 import com.back.shared.market.dto.MarketMemberDto;
 import com.back.shared.member.dto.MemberDto;
 import lombok.RequiredArgsConstructor;

@@ -31,14 +31,7 @@ public class CashSyncMemberUserCase {
         cashMemberRepository.save(cashMember);
 
         if(isNew){
-            eventPublisher.publish(new CashMemberCreatedEvent(new CashMemberDto(
-                    cashMember.getId(),
-                    cashMember.getCreatedDate(),
-                    cashMember.getModifiedDate(),
-                    cashMember.getUsername(),
-                    cashMember.getNickname(),
-                    cashMember.getActivityScore()
-            )));
+            eventPublisher.publish(new CashMemberCreatedEvent(cashMember.toDto()));
         }
         return cashMember;
     }

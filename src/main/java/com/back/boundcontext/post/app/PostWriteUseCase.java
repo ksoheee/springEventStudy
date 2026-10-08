@@ -6,7 +6,6 @@ import com.back.boundcontext.post.out.PostRepository;
 import com.back.global.evnetpublisher.EventPublisher;
 import com.back.global.rsData.RsData;
 import com.back.shared.member.out.MemberApiClient;
-import com.back.shared.post.dto.PostDto;
 import com.back.shared.post.event.PostWriteEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,15 +20,7 @@ public class PostWriteUseCase {
     public RsData<Post> write(PostMember author, String title, String content){
         Post post = postRepository.save(new Post(author, title, content));
 
-        eventPublisher.publish(new PostWriteEvent(new PostDto(
-                post.getId(),
-                post.getCreatedDate(),
-                post.getModifiedDate(),
-                post.getAuthor().getId(),
-                post.getAuthor().getUsername(),
-                post.getTitle(),
-                post.getContent()
-        )));
+        eventPublisher.publish(new PostWriteEvent(post.toDto()));
         String randomSecureTip = memberApiClient.getRandomSecureTip();
 
         return new RsData<>("201-1",

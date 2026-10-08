@@ -1,6 +1,7 @@
 package com.back.boundcontext.post.in;
 
 import com.back.boundcontext.post.app.PostFacade;
+import com.back.boundcontext.post.domain.Post;
 import com.back.shared.post.dto.PostDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,15 +23,7 @@ public class ApiV1PostController {
     public List<PostDto> getPosts(){
         return postFacade.findByOrderByIdDesc()
                 .stream()
-                .map(post ->new PostDto(
-                        post.getId(),
-                        post.getCreatedDate(),
-                        post.getModifiedDate(),
-                        post.getAuthor().getId(),
-                        post.getAuthor().getUsername(),
-                        post.getTitle(),
-                        post.getContent()
-                ))
+                .map(post->post.toDto())
                 .toList();
     }
 
@@ -39,15 +32,7 @@ public class ApiV1PostController {
     @Transactional(readOnly = true)
     public PostDto getPost(@PathVariable Long id){
         return postFacade.findById(id)
-                .map(post ->new PostDto(
-                        post.getId(),
-                        post.getCreatedDate(),
-                        post.getModifiedDate(),
-                        post.getAuthor().getId(),
-                        post.getAuthor().getUsername(),
-                        post.getTitle(),
-                        post.getContent()
-                ))
+                .map(Post::toDto)
                 .get();
     }
 }

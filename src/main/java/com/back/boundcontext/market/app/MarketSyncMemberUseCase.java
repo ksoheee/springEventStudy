@@ -3,7 +3,6 @@ package com.back.boundcontext.market.app;
 import com.back.boundcontext.market.domain.MarketMember;
 import com.back.boundcontext.market.out.MarketMemberRepository;
 import com.back.global.evnetpublisher.EventPublisher;
-import com.back.shared.market.dto.MarketMemberDto;
 import com.back.shared.market.event.MarketMemberCreatedEvent;
 import com.back.shared.member.dto.MemberDto;
 import lombok.RequiredArgsConstructor;
@@ -28,14 +27,7 @@ public class MarketSyncMemberUseCase {
                 member.getActivityScore()
         );
         if(isNew){
-            eventPublisher.publish(new MarketMemberCreatedEvent(new MarketMemberDto(
-                    marketMember.getId(),
-                    marketMember.getCreatedDate(),
-                    marketMember.getModifiedDate(),
-                    marketMember.getUsername(),
-                    marketMember.getNickname(),
-                    marketMember.getActivityScore()
-            )));
+            eventPublisher.publish(new MarketMemberCreatedEvent(marketMember.toDto()));
         }
 
         return marketMemberRepository.save(marketMember);

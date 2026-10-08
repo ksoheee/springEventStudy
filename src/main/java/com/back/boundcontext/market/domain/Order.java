@@ -41,6 +41,20 @@ public class Order extends BaseIdAndTime {
         addItem(product);
     }
 
+    public OrderDto toDto() {
+        return new OrderDto(
+                getId(),
+                getCreatedDate(),
+                getModifiedDate(),
+                buyer.getId(),
+                buyer.getNickname(),
+                price,
+                salePrice,
+                requestPaymentDate,
+                paymentDate
+        );
+    }
+
     public boolean isPaid(){
         return paymentDate != null;
     }
@@ -64,18 +78,7 @@ public class Order extends BaseIdAndTime {
     public void requestPayment(long pgPaymentAmount){
         requestPaymentDate = LocalDateTime.now();
 
-        publishEvent(new MarketOrderPaymentRequestedEvent(new OrderDto(
-                this.getId(),
-                this.getCreatedDate(),
-                this.getModifiedDate(),
-                this.getBuyer().getId(),
-                this.getBuyer().getUsername(),
-                this.getPrice(),
-                this.getSalePrice(),
-                this.getRequestPaymentDate(),
-                this.getPaymentDate()
-
-        ),pgPaymentAmount));
+        publishEvent(new MarketOrderPaymentRequestedEvent(toDto(),pgPaymentAmount));
     }
 
     public void addItem(Product product){

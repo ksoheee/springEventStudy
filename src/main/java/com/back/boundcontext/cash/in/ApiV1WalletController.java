@@ -19,14 +19,7 @@ public class ApiV1WalletController {
     @Transactional(readOnly=true)
     public WalletDto getWalletByHolderId(@PathVariable Long holderId){
         return cashFacade.findWalletByHolderId(holderId)
-                .map(wallet -> new WalletDto(
-                        wallet.getId(),
-                        wallet.getCreatedDate(),
-                        wallet.getModifiedDate(),
-                        wallet.getHolder().getId(),
-                        wallet.getHolder().getUsername(),
-                        wallet.getBalance()
-                ))
+                .map(wallet -> wallet.toDto())
                 .get();
     }
 }

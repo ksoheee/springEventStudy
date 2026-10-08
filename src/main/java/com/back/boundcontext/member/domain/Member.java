@@ -1,8 +1,6 @@
 package com.back.boundcontext.member.domain;
 
 
-import com.back.global.evnetpublisher.EventPublisher;
-import com.back.global.global.GlobalConfig;
 import com.back.shared.member.domain.SourceMember;
 import com.back.shared.member.dto.MemberDto;
 import com.back.shared.member.event.MemberModifiedEvent;
@@ -23,17 +21,20 @@ public class Member extends SourceMember {
         if(amount == 0) return getActivityScore();
 
         setActivityScore(getActivityScore() + amount);
-        publishEvent(new MemberModifiedEvent(new MemberDto(
-                this.getId(),
-                this.getCreatedDate(),
-                this.getModifiedDate(),
-                this.getUsername(),
-                "",
-                this.getNickname(),
-                this.getActivityScore()
-        )));
+        publishEvent(new MemberModifiedEvent(toDto()));
         return getActivityScore();
 
+    }
+    public MemberDto toDto(){
+        return new MemberDto(
+                getId(),
+                getCreatedDate(),
+                getModifiedDate(),
+                getUsername(),
+                getPassword(),
+                getNickname(),
+                getActivityScore()
+        );
     }
 
 }
