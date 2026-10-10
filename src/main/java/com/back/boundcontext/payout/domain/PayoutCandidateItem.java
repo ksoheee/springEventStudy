@@ -2,16 +2,16 @@ package com.back.boundcontext.payout.domain;
 
 import com.back.global.jpa.entity.BaseIdAndTime;
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "PAYOUT_PAYOUT_ITEM")
+@Table(name = "PAYOUT_PAYOUT_CANDIDATE_ITEM")
+@Getter
 @NoArgsConstructor
-public class PayoutItem extends BaseIdAndTime {
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Payout payout;
+public class PayoutCandidateItem extends BaseIdAndTime {
     @Enumerated(EnumType.STRING)
     private PayoutEventType eventType;
     private String relTypeCode;
@@ -23,8 +23,15 @@ public class PayoutItem extends BaseIdAndTime {
     private PayoutMember payee;
     private long amount;
 
-    public PayoutItem(Payout payout, PayoutEventType eventType, String relTypeCode, Long relId, LocalDateTime paymentDate, PayoutMember payer, PayoutMember payee, long amount) {
-        this.payout = payout;
+    public PayoutCandidateItem(
+            PayoutEventType eventType,
+            String relTypeCode,
+            Long relId,
+            LocalDateTime paymentDate,
+            PayoutMember payer,
+            PayoutMember payee,
+            long amount
+            ) {
         this.eventType = eventType;
         this.relTypeCode = relTypeCode;
         this.relId = relId;
@@ -33,4 +40,5 @@ public class PayoutItem extends BaseIdAndTime {
         this.payee = payee;
         this.amount = amount;
     }
+
 }

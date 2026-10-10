@@ -47,8 +47,18 @@ public class OrderItem extends BaseIdAndTime {
                 productName,
                 price,
                 salePrice,
-                payoutRate
+                payoutRate,
+                getPayoutFee(),
+                getSalePriceWithoutFee()
         );
+    }
+    //정산금액계산
+    public long getPayoutFee(){
+        return MarketPolicy.calculatePayoutFee(getSalePrice(), getPayoutRate());
+    }
+    //수수료 계산
+    public long getSalePriceWithoutFee(){
+        return MarketPolicy.calculateSalePriceWithoutFee(getSalePrice(), getPayoutRate());
     }
 
 
