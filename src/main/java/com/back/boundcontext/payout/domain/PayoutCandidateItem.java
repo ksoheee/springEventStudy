@@ -4,8 +4,11 @@ import com.back.global.jpa.entity.BaseIdAndTime;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
+
+import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
 @Table(name = "PAYOUT_PAYOUT_CANDIDATE_ITEM")
@@ -22,6 +25,9 @@ public class PayoutCandidateItem extends BaseIdAndTime {
     @ManyToOne(fetch = FetchType.LAZY)
     private PayoutMember payee;
     private long amount;
+    @OneToOne(fetch = LAZY)
+    @Setter
+    private PayoutItem payoutItem;
 
     public PayoutCandidateItem(
             PayoutEventType eventType,
