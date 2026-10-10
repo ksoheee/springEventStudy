@@ -1,9 +1,9 @@
 package com.back.boundcontext.payout.in;
 
 import com.back.boundcontext.payout.app.PayoutFacade;
+import com.back.shared.market.event.MarketOrderPaymentCompletedEvent;
 import com.back.shared.member.event.MemberCreatedEvent;
 import com.back.shared.member.event.MemberModifiedEvent;
-import com.back.shared.payout.event.MarketOrderPaymentCompletedEvent;
 import com.back.shared.payout.event.PayoutMemberCreatedEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
